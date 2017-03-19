@@ -1,5 +1,5 @@
 module fifo_u_tb();
-wire full, empty;
+wire full, empty, ready;
 wire [31:0] dout;
 
 parameter REPEAT_ITERATIONS = 10;

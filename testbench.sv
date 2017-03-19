@@ -1,3 +1,5 @@
+`timescale 1ns/1ps 
+
 // This is a simple testbench you can use to test out your 8x8 switch
 
 module tb;

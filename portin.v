@@ -9,21 +9,21 @@ always@(posedge clock, posedge clear, negedge reset_n)
       cnta <=0; //address counter
       cntp <=0; //payload counter
       vld <= 0; //valid output
-      payload <= 32'h0000_00000;
+      payload <= 32'h0000_0000;
    end
    else if(clear)
    begin
       vld <= 0;
       cnta <= 0;
       cntp <= 0;
-      payload <= 32'h0000_00000;
+      payload <= 32'h0000_0000;
    end
    else begin
-      if(!frame_n && valid_n) begin
+      if(!frame_n && valid_n) begin //address read cycle
          if(cnta < 4) addr [cnta] <=di;
          cnta <= cnta + 1;
       end
-      else if(!frame_n && !valid_n) begin
+      else if(!frame_n && !valid_n) begin //payload read cycle
          if(cntp < 32) payload[cntp] <= di;
          cntp <= cntp + 1;
       end
