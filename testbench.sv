@@ -1,4 +1,4 @@
-//`timescale 1ns/1ps 
+`timescale 1ns/1ps 
 
 // This is a simple testbench you can use to test out your 8x8 switch
 
@@ -60,8 +60,8 @@ if ($test$plusargs("SMOKE")) begin
 end
 
 if ($test$plusargs("SMOKESEQ")) begin 
-  $display("STARTING SEQUENTIAL SMOKE TEST!!!!"); 
-  repeat(10) sendpkt(0,7,$random); 
+   $display("STARTING SEQUENTIAL SMOKE TEST!!!!");
+   repeat(10) sendpkt(0,7,$random);
 end
 
 if ($test$plusargs("1PORT")) begin 
