@@ -1,4 +1,4 @@
-`timescale 1ns/1ps 
+//`timescale 1ns/1ps 
 // This is a simple testbench you can use to test out your 8x8 switch
 
 module tb;
@@ -153,7 +153,7 @@ initial begin
     data[i] <= data_in;  
     @(posedge clock); 
   end
-$display("Received packet @%5t [sa=%2d] data=%h",$time,port,data); 
+$display("Received packet @%5t [da=%2d] data=%h",$time,port,data); 
 end
 end
 

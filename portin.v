@@ -17,7 +17,7 @@ always@(posedge clock, posedge granted, negedge reset_n)
    end
    else begin
       if(!frame_n && valid_n) begin //portin reads address from di
-         if(cnta < 4) inc_addr [cnta] <=di;
+         if(cnta < 4) inc_addr[cnta] <=di;
          cnta <= cnta + 1;
       end
       else if(!frame_n && !valid_n) begin //portin reads payload from di
