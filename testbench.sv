@@ -1,5 +1,4 @@
 `timescale 1ns/1ps 
-
 // This is a simple testbench you can use to test out your 8x8 switch
 
 module tb;
@@ -59,9 +58,9 @@ if ($test$plusargs("SMOKE")) begin
   sendpkt(0,7,32'hdead_beef); 
 end
 
-if ($test$plusargs("SMOKESEQ")) begin 
-   $display("STARTING SEQUENTIAL SMOKE TEST!!!!");
-   repeat(10) sendpkt(0,7,$random);
+if ($test$plusargs("SMOKE_SEQ")) begin 
+  $display("STARTING SEQUENTIAL SMOKE TEST!!!!");  
+  repeat(10) sendpkt(0,7,$random); 
 end
 
 if ($test$plusargs("1PORT")) begin 

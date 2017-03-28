@@ -5,7 +5,7 @@ reg [31:0] din [7:0];
 reg [3:0] addr [7:0];
 reg [7:0] grant;
 wire [31:0] dout [7:0];
-
+wire [7:0] push;
 switch_fabric dut(.din(din), .addr(addr), .grant(grant), .dout(dout));
 
 always #5 clk = !clk;

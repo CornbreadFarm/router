@@ -1,11 +1,11 @@
-module portin(input clock, reset_n, frame_n, valid_n, di, clear,
+module portin(input clock, reset_n, frame_n, valid_n, di, granted,
    output reg[3:0] addr, output reg [31:0] payload, output reg vld);
 
 reg [5:0] cnta, cntp;
 reg [3:0] inc_addr;
 reg [31:0] inc_payload;
 
-always@(posedge clock, posedge clear, negedge reset_n)
+always@(posedge clock, posedge granted, negedge reset_n)
    if(!reset_n)
    begin
       cnta <=0; //address counter
@@ -15,21 +15,12 @@ always@(posedge clock, posedge clear, negedge reset_n)
       inc_payload <= 32'h0000_0000;
       inc_addr <= 0;
    end
-   else if(clear)
-   begin
-      vld <= 0;
-      cnta <= 0;
-      cntp <= 0;
-      payload <= 32'h0000_0000;
-      inc_payload <= 32'h0000_0000;
-      payload <= 32'h0000_0000;
-   end
    else begin
-      if(!frame_n && valid_n) begin //address read cycle
+      if(!frame_n && valid_n) begin //portin reads address from di
          if(cnta < 4) inc_addr [cnta] <=di;
          cnta <= cnta + 1;
       end
-      else if(!frame_n && !valid_n) begin //payload read cycle
+      else if(!frame_n && !valid_n) begin //portin reads payload from di
          if(cntp < 32) inc_payload[cntp] <= di;
          cntp <= cntp + 1;
       end
@@ -42,12 +33,7 @@ always@(posedge clock, posedge clear, negedge reset_n)
          cntp <= 0;
          $strobe("DBG: %t:%d %h", $time, addr, payload);
       end
-      else begin
-         vld <= 0;
-         cnta <= 0;
-         cntp <= 0;
-         inc_payload <= 32'h0000_0000;
-         inc_addr <= 0;
-      end
+      if(granted)
+         vld <=0;
    end
 endmodule     
