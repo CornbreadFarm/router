@@ -60,7 +60,7 @@ end
 
 if ($test$plusargs("SMOKE_SEQ")) begin 
   $display("STARTING SEQUENTIAL SMOKE TEST!!!!");  
-  repeat(10) sendpkt(0,7,$random); 
+  repeat(10) sendpkt(1,2,$random); 
 end
 
 if ($test$plusargs("1PORT")) begin 
